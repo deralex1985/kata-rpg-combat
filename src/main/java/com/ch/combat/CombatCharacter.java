@@ -36,6 +36,11 @@ public class CombatCharacter {
     }
 
     public void receivedDamage(int damage){
+        if(damage>1000){
+            health=0;
+            alive= false;
+        } else {
         health -= damage;
+        }
     }
 }
