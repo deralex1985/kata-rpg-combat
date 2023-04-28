@@ -90,4 +90,13 @@ class CombatCharacterTest {
         testee.receivedDamage(500, opponent);
         assertEquals(750, testee.getHealth());
     }
+
+    @Test
+    void ifAttackerIs5LevelsLowerDamageEffectShouldBeIncreasedBy50Percent() {
+        CombatCharacter testee = new CombatCharacter();
+        CombatCharacter opponent = new CombatCharacter();
+        testee.setLevel(6);
+        testee.receivedDamage(200, opponent);
+        assertEquals(700, testee.getHealth());
+    }
 }

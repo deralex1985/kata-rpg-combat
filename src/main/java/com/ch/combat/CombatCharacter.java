@@ -1,8 +1,8 @@
 package com.ch.combat;
 
 public class CombatCharacter {
-    private static final int MIN_LEVEL_DIFFERENCE_FOR_DAMAGE_REDUCTION = 5;
-    private static final int DAMAGE_REDUCTION_FACTOR = 2;
+    private static final int MIN_LEVEL_DIFFERENCE_FOR_DAMAGE_ADJUSTMENT = 5;
+    private static final int DAMAGE_ADJUSTMENT_FACTOR = 2;
     private final int MAX_POINTS = 1000;
     private int health;
     private int level;
@@ -48,10 +48,13 @@ public class CombatCharacter {
     }
 
     private int getLevelAdjustedDamage(int damage, CombatCharacter actor) {
-        if (actor.getLevel() < this.getLevel()+ MIN_LEVEL_DIFFERENCE_FOR_DAMAGE_REDUCTION) {
+        if (getLevelDifferenceToAggressor(actor) < MIN_LEVEL_DIFFERENCE_FOR_DAMAGE_ADJUSTMENT) {
             return damage;
         }
-        return damage / DAMAGE_REDUCTION_FACTOR;
+        if (actor.getLevel() > this.getLevel()) {
+            return damage / DAMAGE_ADJUSTMENT_FACTOR;
+        }
+        return damage + (damage / DAMAGE_ADJUSTMENT_FACTOR);
     }
 
     public void heal(int healthPoints, CombatCharacter actor) {
@@ -61,5 +64,9 @@ public class CombatCharacter {
         if (alive) {
             health = Math.min(health + healthPoints, MAX_POINTS);
         }
+    }
+
+    private int getLevelDifferenceToAggressor(CombatCharacter actor) {
+        return Math.abs(actor.getLevel() - this.getLevel());
     }
 }
