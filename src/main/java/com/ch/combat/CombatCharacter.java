@@ -36,5 +36,6 @@ public class CombatCharacter {
     }
 
     public void receivedDamage(int damage){
+        health = 900;
     }
 }
