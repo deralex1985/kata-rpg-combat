@@ -43,4 +43,8 @@ public class CombatCharacter {
             health -= damage;
         }
     }
+
+    public void heal(int healthPoints) {
+
+    }
 }
