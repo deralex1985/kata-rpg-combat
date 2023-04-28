@@ -37,6 +37,14 @@ class CombatCharacterTest {
     }
 
     @Test
+    void charachterShouldNotBeAbleToDamageItself() {
+        CombatCharacter testee = new CombatCharacter();
+        testee.receivedDamage(2000, testee);
+        assertEquals(1000, testee.getHealth());
+        assertTrue(testee.isAlive());
+    }
+
+    @Test
     void deadCharacterShouldNotBeHealed() {
         CombatCharacter testee = new CombatCharacter();
         testee.setAlive(false);
