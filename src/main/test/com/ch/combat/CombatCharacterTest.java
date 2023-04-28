@@ -34,4 +34,13 @@ class CombatCharacterTest {
         assertFalse(testee.isAlive());
     }
 
+    @Test
+    void deadCharacterShouldNotBeHealed() {
+        CombatCharacter testee = new CombatCharacter();
+        testee.setAlive(false);
+        testee.setHealth(0);
+        testee.heal(500);
+        assertEquals(0, testee.getHealth());
+        assertFalse(testee.isAlive());
+    }
 }
