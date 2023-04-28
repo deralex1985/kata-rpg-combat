@@ -5,6 +5,12 @@ public class CombatCharacter {
     private int level;
     private boolean alive;
 
+    public CombatCharacter() {
+        this.health = 1000;
+        this.level = 1;
+        this.alive = true;
+    }
+
     public int getHealth() {
         return health;
     }
@@ -29,18 +35,12 @@ public class CombatCharacter {
         this.level = level;
     }
 
-    public CombatCharacter() {
-        this.health = 1000;
-        this.level = 1;
-        this.alive = true;
-    }
-
-    public void receivedDamage(int damage){
-        if(damage>1000){
-            health=0;
-            alive= false;
+    public void receivedDamage(int damage) {
+        if (damage > health) {
+            health = 0;
+            alive = false;
         } else {
-        health -= damage;
+            health -= damage;
         }
     }
 }
