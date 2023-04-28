@@ -8,7 +8,7 @@ class CombatCharacterTest {
 
     @Test
     void shouldReturnCorrectInitializedClass() {
-        CombatCharacter testee = new CombatCharacter();
+        Melee testee = new Melee();
 
         assertEquals(1000, testee.getHealth());
         assertEquals(1, testee.getLevel());
@@ -17,36 +17,36 @@ class CombatCharacterTest {
 
     @Test
     void healtOfCharacterShouldBeLoweredAfterDamage() {
-        CombatCharacter testee = new CombatCharacter();
-        CombatCharacter opponent = new CombatCharacter();
-        testee.receivedDamage(100, opponent);
+        Melee testee = new Melee();
+        Melee opponent = new Melee();
+        testee.receivedDamage(100, opponent, 0);
         assertEquals(900, testee.getHealth());
-        testee.receivedDamage(200, opponent);
+        testee.receivedDamage(200, opponent, 0);
         assertEquals(700, testee.getHealth());
     }
 
     @Test
     void healtOfCharacterShouldNeverBeNegative() {
-        CombatCharacter testee = new CombatCharacter();
-        CombatCharacter opponent = new CombatCharacter();
-        testee.receivedDamage(500, opponent);
+        Melee testee = new Melee();
+        Melee opponent = new Melee();
+        testee.receivedDamage(500, opponent, 0);
         assertEquals(500, testee.getHealth());
-        testee.receivedDamage(500, opponent);
+        testee.receivedDamage(500, opponent, 0);
         assertEquals(0, testee.getHealth());
         assertFalse(testee.isAlive());
     }
 
     @Test
     void charachterShouldNotBeAbleToDamageItself() {
-        CombatCharacter testee = new CombatCharacter();
-        testee.receivedDamage(2000, testee);
+        Melee testee = new Melee();
+        testee.receivedDamage(2000, testee, 0);
         assertEquals(1000, testee.getHealth());
         assertTrue(testee.isAlive());
     }
 
     @Test
     void deadCharacterShouldNotBeHealed() {
-        CombatCharacter testee = new CombatCharacter();
+        Melee testee = new Melee();
         testee.setAlive(false);
         testee.setHealth(0);
         testee.heal(500, testee);
@@ -56,7 +56,7 @@ class CombatCharacterTest {
 
     @Test
     void characterShouldBeHealedIfSelf() {
-        CombatCharacter testee = new CombatCharacter();
+        Melee testee = new Melee();
         testee.setHealth(100);
         testee.heal(500, testee);
         assertEquals(600, testee.getHealth());
@@ -65,8 +65,8 @@ class CombatCharacterTest {
 
     @Test
     void characterShouldNotBeHealedByOthers() {
-        CombatCharacter testee = new CombatCharacter();
-        CombatCharacter opponent = new CombatCharacter();
+        Melee testee = new Melee();
+        Melee opponent = new Melee();
         testee.setHealth(100);
         testee.heal(500, opponent);
         assertEquals(100, testee.getHealth());
@@ -75,7 +75,7 @@ class CombatCharacterTest {
 
     @Test
     void characterHealthShouldNotExceed1000Points() {
-        CombatCharacter testee = new CombatCharacter();
+        Melee testee = new Melee();
         testee.setHealth(800);
         testee.heal(500, testee);
         assertEquals(1000, testee.getHealth());
@@ -84,19 +84,19 @@ class CombatCharacterTest {
 
     @Test
     void ifAttackerIs5LevelsHigherDamageEffectShouldBeReducedBy50Percent() {
-        CombatCharacter testee = new CombatCharacter();
-        CombatCharacter opponent = new CombatCharacter();
+        Melee testee = new Melee();
+        Melee opponent = new Melee();
         opponent.setLevel(6);
-        testee.receivedDamage(500, opponent);
+        testee.receivedDamage(500, opponent, 0);
         assertEquals(750, testee.getHealth());
     }
 
     @Test
     void ifAttackerIs5LevelsLowerDamageEffectShouldBeIncreasedBy50Percent() {
-        CombatCharacter testee = new CombatCharacter();
-        CombatCharacter opponent = new CombatCharacter();
+        Melee testee = new Melee();
+        Melee opponent = new Melee();
         testee.setLevel(6);
-        testee.receivedDamage(200, opponent);
+        testee.receivedDamage(200, opponent, 0);
         assertEquals(700, testee.getHealth());
     }
 }

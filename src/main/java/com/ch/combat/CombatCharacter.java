@@ -1,12 +1,14 @@
 package com.ch.combat;
 
-public class CombatCharacter {
+public abstract class CombatCharacter {
     private static final int MIN_LEVEL_DIFFERENCE_FOR_DAMAGE_ADJUSTMENT = 5;
     private static final int DAMAGE_ADJUSTMENT_FACTOR = 2;
     private final int MAX_POINTS = 1000;
     private int health;
     private int level;
     private boolean alive;
+
+    protected int attackRange;
 
     public CombatCharacter() {
         this.health = 1000;
@@ -38,7 +40,7 @@ public class CombatCharacter {
         this.level = level;
     }
 
-    public void receivedDamage(int damage, CombatCharacter actor) {
+    public void receivedDamage(int damage, CombatCharacter actor, int distance) {
         if(actor==this){
             return;
         }
