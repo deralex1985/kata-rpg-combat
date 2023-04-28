@@ -15,4 +15,11 @@ class CombatCharacterTest {
         assertEquals(1, testee.getLevel());
         assertTrue(testee.isAlive());
     }
+
+    @Test
+    void healtOfCharacterShouldBeLoweredAfterDamage() {
+        CombatCharacter testee = new CombatCharacter();
+        testee.receivedDamage(100);
+        assertEquals(900, testee.getHealth());
+    }
 }

@@ -34,4 +34,7 @@ public class CombatCharacter {
         this.level = 1;
         this.alive = true;
     }
+
+    public void receivedDamage(int damage){
+    }
 }
