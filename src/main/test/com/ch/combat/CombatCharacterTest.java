@@ -21,5 +21,7 @@ class CombatCharacterTest {
         CombatCharacter testee = new CombatCharacter();
         testee.receivedDamage(100);
         assertEquals(900, testee.getHealth());
+        testee.receivedDamage(200);
+        assertEquals(700, testee.getHealth());
     }
 }
