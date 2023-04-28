@@ -1,3 +1,5 @@
+package com.ch.combat;
+
 public class CombatCharacter {
     private int health;
     private int level;
@@ -25,5 +27,11 @@ public class CombatCharacter {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public CombatCharacter() {
+        this.health = 1000;
+        this.level = 1;
+        this.alive = true;
     }
 }
