@@ -2,8 +2,7 @@ package com.ch.combat;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CombatCharacterTest {
 
@@ -28,8 +27,11 @@ class CombatCharacterTest {
     @Test
     void healtOfCharacterShouldNeverBeNegative() {
         CombatCharacter testee = new CombatCharacter();
-        testee.receivedDamage(2000);
+        testee.receivedDamage(500);
+        assertEquals(500, testee.getHealth());
+        testee.receivedDamage(800);
         assertEquals(0, testee.getHealth());
+        assertFalse(testee.isAlive());
     }
 
 }
