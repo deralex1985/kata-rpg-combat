@@ -1,6 +1,8 @@
 package com.ch.combat;
 
 public class CombatCharacter {
+    private static final int MIN_LEVEL_DIFFERENCE_FOR_DAMAGE_REDUCTION = 5;
+    private static final int DAMAGE_REDUCTION_FACTOR = 2;
     private final int MAX_POINTS = 1000;
     private int health;
     private int level;
@@ -40,8 +42,16 @@ public class CombatCharacter {
         if(actor==this){
             return;
         }
-        health = Math.max(health - damage, 0);
+        int levelAdjustedDamage = getLevelAdjustedDamage(damage, actor);
+        health = Math.max(health - levelAdjustedDamage, 0);
         alive = health > 0;
+    }
+
+    private int getLevelAdjustedDamage(int damage, CombatCharacter actor) {
+        if (actor.getLevel() < this.getLevel()+ MIN_LEVEL_DIFFERENCE_FOR_DAMAGE_REDUCTION) {
+            return damage;
+        }
+        return damage / DAMAGE_REDUCTION_FACTOR;
     }
 
     public void heal(int healthPoints, CombatCharacter actor) {
