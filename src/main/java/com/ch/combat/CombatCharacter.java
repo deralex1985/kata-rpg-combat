@@ -36,7 +36,7 @@ public class CombatCharacter {
     }
 
     public void receivedDamage(int damage) {
-        if (damage > health) {
+        if (damage >= health) {
             health = 0;
             alive = false;
         } else {
