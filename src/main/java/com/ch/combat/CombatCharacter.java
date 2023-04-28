@@ -37,7 +37,10 @@ public class CombatCharacter {
         this.level = level;
     }
 
-    public void receivedDamage(int damage) {
+    public void receivedDamage(int damage, CombatCharacter actor) {
+        if(actor==this){
+            return;
+        }
         health = Math.max(health - damage, 0);
         alive = health > 0;
     }

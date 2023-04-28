@@ -18,18 +18,20 @@ class CombatCharacterTest {
     @Test
     void healtOfCharacterShouldBeLoweredAfterDamage() {
         CombatCharacter testee = new CombatCharacter();
-        testee.receivedDamage(100);
+        CombatCharacter opponent = new CombatCharacter();
+        testee.receivedDamage(100, opponent);
         assertEquals(900, testee.getHealth());
-        testee.receivedDamage(200);
+        testee.receivedDamage(200, opponent);
         assertEquals(700, testee.getHealth());
     }
 
     @Test
     void healtOfCharacterShouldNeverBeNegative() {
         CombatCharacter testee = new CombatCharacter();
-        testee.receivedDamage(500);
+        CombatCharacter opponent = new CombatCharacter();
+        testee.receivedDamage(500, opponent);
         assertEquals(500, testee.getHealth());
-        testee.receivedDamage(500);
+        testee.receivedDamage(500, opponent);
         assertEquals(0, testee.getHealth());
         assertFalse(testee.isAlive());
     }
