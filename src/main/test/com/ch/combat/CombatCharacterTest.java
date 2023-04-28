@@ -52,4 +52,13 @@ class CombatCharacterTest {
         assertEquals(600, testee.getHealth());
         assertTrue(testee.isAlive());
     }
+
+    @Test
+    void characterHealthShouldNotExceed1000Points() {
+        CombatCharacter testee = new CombatCharacter();
+        testee.setHealth(800);
+        testee.heal(500);
+        assertEquals(1000, testee.getHealth());
+        assertFalse(testee.isAlive());
+    }
 }
