@@ -101,10 +101,26 @@ class CombatCharacterTest {
     }
 
     @Test
-    void ifAttackIsOutOfRangeNoDamageIsApplied() {
+    void ifAttackIsOutOfRangeForMeleeNoDamageIsApplied() {
         Melee testee = new Melee();
         Melee opponent = new Melee();
         testee.receivedDamage(200, opponent, 5);
         assertEquals(1000, testee.getHealth());
+    }
+
+    @Test
+    void ifAttackIsOutOfRangeForRangedNoDamageIsApplied() {
+        Melee testee = new Melee();
+        Ranged opponent = new Ranged();
+        testee.receivedDamage(200, opponent, 21);
+        assertEquals(1000, testee.getHealth());
+    }
+
+    @Test
+    void ifAttackIsExactRangeOfRangeCharacterDamageIsApplied() {
+        Melee testee = new Melee();
+        Ranged opponent = new Ranged();
+        testee.receivedDamage(200, opponent, 20);
+        assertEquals(800, testee.getHealth());
     }
 }

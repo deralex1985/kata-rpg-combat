@@ -48,7 +48,7 @@ public abstract class CombatCharacter {
     }
 
     private boolean canDamageBeApplied(CombatCharacter actor, int distance) {
-        return actor != this && distance <= this.attackRange;
+        return actor != this && distance <= actor.attackRange;
     }
 
     public void heal(int healthPoints, CombatCharacter actor) {
