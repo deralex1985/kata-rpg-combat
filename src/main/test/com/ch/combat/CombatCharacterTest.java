@@ -24,4 +24,12 @@ class CombatCharacterTest {
         testee.receivedDamage(200);
         assertEquals(700, testee.getHealth());
     }
+
+    @Test
+    void healtOfCharacterShouldNeverBeNegative() {
+        CombatCharacter testee = new CombatCharacter();
+        testee.receivedDamage(2000);
+        assertEquals(0, testee.getHealth());
+    }
+
 }
