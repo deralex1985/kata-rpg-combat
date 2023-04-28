@@ -41,17 +41,27 @@ class CombatCharacterTest {
         CombatCharacter testee = new CombatCharacter();
         testee.setAlive(false);
         testee.setHealth(0);
-        testee.heal(500);
+        testee.heal(500, testee);
         assertEquals(0, testee.getHealth());
         assertFalse(testee.isAlive());
     }
 
     @Test
-    void characterShouldBeHealed() {
+    void characterShouldBeHealedIfSelf() {
         CombatCharacter testee = new CombatCharacter();
         testee.setHealth(100);
-        testee.heal(500);
+        testee.heal(500, testee);
         assertEquals(600, testee.getHealth());
+        assertTrue(testee.isAlive());
+    }
+
+    @Test
+    void characterShouldNotBeHealedByOthers() {
+        CombatCharacter testee = new CombatCharacter();
+        CombatCharacter opponent = new CombatCharacter();
+        testee.setHealth(100);
+        testee.heal(500, opponent);
+        assertEquals(100, testee.getHealth());
         assertTrue(testee.isAlive());
     }
 
@@ -59,7 +69,7 @@ class CombatCharacterTest {
     void characterHealthShouldNotExceed1000Points() {
         CombatCharacter testee = new CombatCharacter();
         testee.setHealth(800);
-        testee.heal(500);
+        testee.heal(500, testee);
         assertEquals(1000, testee.getHealth());
         assertTrue(testee.isAlive());
     }

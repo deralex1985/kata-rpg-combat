@@ -1,7 +1,6 @@
 package com.ch.combat;
 
 public class CombatCharacter {
-
     private final int MAX_POINTS = 1000;
     private int health;
     private int level;
@@ -45,7 +44,10 @@ public class CombatCharacter {
         alive = health > 0;
     }
 
-    public void heal(int healthPoints) {
+    public void heal(int healthPoints, CombatCharacter actor) {
+        if (actor != this) {
+            return;
+        }
         if (alive) {
             health = Math.min(health + healthPoints, MAX_POINTS);
         }
