@@ -38,15 +38,13 @@ public class CombatCharacter {
     }
 
     public void receivedDamage(int damage) {
-        if (damage >= health) {
-            health = 0;
-            alive = false;
-        } else {
-            health -= damage;
-        }
+        health = Math.max(health - damage, 0);
+        alive = health > 0;
     }
 
     public void heal(int healthPoints) {
-        health = Math.min(health+healthPoints, MAX_POINTS);
+        if (alive) {
+            health = Math.min(health + healthPoints, MAX_POINTS);
+        }
     }
 }
