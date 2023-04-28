@@ -50,6 +50,6 @@ class CombatCharacterTest {
         testee.setHealth(100);
         testee.heal(500);
         assertEquals(600, testee.getHealth());
-        assertFalse(testee.isAlive());
+        assertTrue(testee.isAlive());
     }
 }
