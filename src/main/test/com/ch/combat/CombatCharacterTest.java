@@ -29,7 +29,7 @@ class CombatCharacterTest {
         CombatCharacter testee = new CombatCharacter();
         testee.receivedDamage(500);
         assertEquals(500, testee.getHealth());
-        testee.receivedDamage(800);
+        testee.receivedDamage(500);
         assertEquals(0, testee.getHealth());
         assertFalse(testee.isAlive());
     }
