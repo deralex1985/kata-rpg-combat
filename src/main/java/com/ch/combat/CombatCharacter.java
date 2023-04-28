@@ -47,16 +47,6 @@ public class CombatCharacter {
         alive = health > 0;
     }
 
-    private int getLevelAdjustedDamage(int damage, CombatCharacter actor) {
-        if (getLevelDifferenceToAggressor(actor) < MIN_LEVEL_DIFFERENCE_FOR_DAMAGE_ADJUSTMENT) {
-            return damage;
-        }
-        if (actor.getLevel() > this.getLevel()) {
-            return damage / DAMAGE_ADJUSTMENT_FACTOR;
-        }
-        return damage + (damage / DAMAGE_ADJUSTMENT_FACTOR);
-    }
-
     public void heal(int healthPoints, CombatCharacter actor) {
         if (actor != this) {
             return;
@@ -64,6 +54,21 @@ public class CombatCharacter {
         if (alive) {
             health = Math.min(health + healthPoints, MAX_POINTS);
         }
+    }
+
+    private int getLevelAdjustedDamage(int damage, CombatCharacter actor) {
+        if (getLevelDifferenceToAggressor(actor) < MIN_LEVEL_DIFFERENCE_FOR_DAMAGE_ADJUSTMENT) {
+            return damage;
+        }
+
+        int adjustement = damage / DAMAGE_ADJUSTMENT_FACTOR;
+        return shouldDamageBeIncreased(actor)
+            ? damage + adjustement
+            : damage - adjustement;
+    }
+
+    private boolean shouldDamageBeIncreased(CombatCharacter actor) {
+        return actor.getLevel() < this.getLevel();
     }
 
     private int getLevelDifferenceToAggressor(CombatCharacter actor) {
